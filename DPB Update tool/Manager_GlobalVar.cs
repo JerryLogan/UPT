@@ -56,7 +56,7 @@ namespace DPB_Update_tool
         public static string DevicePathPort = "";
         public static string LogPath = "";
         public static int LogExpiredDays = 0;
-        public static int FWUpgtimeout = 0;
+        public static int FWUpgtimeout = 180;
         public static int USBDetecttimeout = 0;
         public static int ProtectEnable = 0;
         public static byte[] CMD42password = { };
@@ -71,7 +71,7 @@ namespace DPB_Update_tool
         public static string GPSFilePath = "";
         public static string IRFilePath = "";
         public static int USBDetectEvent_ms = 0;
-        public static int ReScan_USBDetect_sec = 0;
+        public static int ReScan_USBDetect_sec = 1;
         public static int UIDCheckTimeOut = 10; //TS_Jeffrey 20220707 Add new setting parameter (UICheckTimeOut)
         public static int FactoryFlag_MP = 0;
         public static string ADASFilePath = "";
@@ -115,14 +115,11 @@ namespace DPB_Update_tool
 
         //[USBCmdSet]
         public static int USBCMD_Flow = 0;
-        public static int USBCMD_CMDStringVersion = 0;
-        public static int USBCMD_RestoreFlow = 0;
+
         public static int USBCMD_SettingReset = -1;
         public static int USBCMD_Format = -1;
-        public static int USBCMD_Reboot = -1;
         public static int USBCMD_FWUpgrade = -1;
         public static int USBCMD_LDVersion = -1;
-        public static int USBCMD_FWVersion = 17;
         public static int USBCMD_STM8Upgrade = -1;
         public static int USBCMD_STM8Version = -1;
         public static int USBCMD_DateTime = -1;
@@ -137,9 +134,6 @@ namespace DPB_Update_tool
         public static int USBCMD_SetPversion = -1;
         public static int USBCMD_SetPassword = -1;
         public static int USBCMD_FilterStatus = -1;
-        public static int USBCMD_SetUID = 162;
-        public static int USBCMD_QCUnlock = -1;
-        public static int USBCMD_DeviceModel = 14;
         public static int USBCMD_FactoryFlag_MP = -1;
         public static int USBCMD_FactoryFlag_QC = -1;
         public static int USBCMD_FactoryFlag_WIFI = -1;
@@ -152,17 +146,32 @@ namespace DPB_Update_tool
         public static int USBCMD_ADASLicense_SerialNumber = -1;
         public static int USBCMD_WiFiTest = -1;
         public static int USBCMD_WirelessDualCam = -1;
-
+        public static int USBCMD_SetUID = 162;
+        public static int USBCMD_QCUnlock = 130;
+        public static int USBCMD_DeviceModel = 14;
+        public static int USBCMD_WiFiSSID = 191;
+        public static int USBCMD_Reboot = 77;
+        public static int USBCMD_FWVersion = 17;
+        public static int USBCMD_CMDStringVersion = 2;
+        public static int USBCMD_Restore = 72;
         //
-        
+
     }
 
     public partial class Form1
     {
         public void LoadSetting()
         {
-            globalVarManager.USB_VEN[0] = "DPB70";
-            globalVarManager.ModelPID = "5060";
+            //60A
+            globalVarManager.USB_VEN[0] = "DPB";
+            globalVarManager.ModelPID = "5000";
+            globalVarManager.QCPassWord = Encoding.ASCII.GetBytes(" ");
+
+            
+            //5060
+            //Firmware\DPB60_5000\v1.3.0_H0320\FWDPB60A.bin
+        //globalVarManager.USB_VEN[0] = "DPB30";
+        //globalVarManager.ModelPID = "5060";
         }
 
         public void LoadUSBCountSetting()

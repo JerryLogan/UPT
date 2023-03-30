@@ -29,6 +29,7 @@ namespace DPB_Update_tool
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,9 +37,9 @@ namespace DPB_Update_tool
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.Scan = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.Scan_btn = new System.Windows.Forms.Button();
+            this.Upgrade_btn = new System.Windows.Forms.Button();
+            this.Reset_btn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -115,48 +116,54 @@ namespace DPB_Update_tool
             this.label7.TabIndex = 6;
             this.label7.Text = "                  ";
             // 
-            // Scan
+            // Scan_btn
             // 
-            this.Scan.Location = new System.Drawing.Point(12, 12);
-            this.Scan.Name = "Scan";
-            this.Scan.Size = new System.Drawing.Size(247, 27);
-            this.Scan.TabIndex = 7;
-            this.Scan.Text = "Scan";
-            this.Scan.UseVisualStyleBackColor = true;
-            this.Scan.Click += new System.EventHandler(this.scan_Click);
+            this.Scan_btn.Location = new System.Drawing.Point(12, 12);
+            this.Scan_btn.Name = "Scan_btn";
+            this.Scan_btn.Size = new System.Drawing.Size(247, 27);
+            this.Scan_btn.TabIndex = 7;
+            this.Scan_btn.Text = "Scan";
+            this.Scan_btn.UseVisualStyleBackColor = true;
+            this.Scan_btn.Click += new System.EventHandler(this.scan_Click);
             // 
-            // button2
+            // Upgrade_btn
             // 
-            this.button2.Location = new System.Drawing.Point(12, 213);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(247, 27);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Upgrade";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Upgrade_btn.Enabled = false;
+            this.Upgrade_btn.Location = new System.Drawing.Point(12, 194);
+            this.Upgrade_btn.Name = "Upgrade_btn";
+            this.Upgrade_btn.Size = new System.Drawing.Size(247, 27);
+            this.Upgrade_btn.TabIndex = 8;
+            this.Upgrade_btn.Text = "Upgrade";
+            this.Upgrade_btn.UseVisualStyleBackColor = true;
+            this.Upgrade_btn.Click += new System.EventHandler(this.Upgrade_btn_Click);
             // 
-            // button3
+            // Reset_btn
             // 
-            this.button3.Location = new System.Drawing.Point(12, 258);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(247, 28);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Reset";
-            this.button3.UseVisualStyleBackColor = true;
+            this.Reset_btn.Enabled = false;
+            this.Reset_btn.Location = new System.Drawing.Point(12, 249);
+            this.Reset_btn.Name = "Reset_btn";
+            this.Reset_btn.Size = new System.Drawing.Size(247, 28);
+            this.Reset_btn.TabIndex = 9;
+            this.Reset_btn.Text = "Reset";
+            this.Reset_btn.UseVisualStyleBackColor = true;
+            this.Reset_btn.Visible = false;
+            this.Reset_btn.Click += new System.EventHandler(this.Reset_btn_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("新細明體", 14F);
-            this.label8.Location = new System.Drawing.Point(39, 59);
+            this.label8.Location = new System.Drawing.Point(32, 59);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 19);
+            this.label8.Size = new System.Drawing.Size(48, 19);
             this.label8.TabIndex = 10;
-            this.label8.Text = "UID";
+            this.label8.Text = "SSID";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 313);
+            this.label9.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label9.Location = new System.Drawing.Point(16, 224);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 12);
             this.label9.TabIndex = 11;
@@ -166,12 +173,12 @@ namespace DPB_Update_tool
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(270, 337);
+            this.ClientSize = new System.Drawing.Size(270, 291);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Scan);
+            this.Controls.Add(this.Reset_btn);
+            this.Controls.Add(this.Upgrade_btn);
+            this.Controls.Add(this.Scan_btn);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -179,8 +186,10 @@ namespace DPB_Update_tool
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "UpdateTool v1.1";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,9 +204,9 @@ namespace DPB_Update_tool
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button Scan;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button Scan_btn;
+        private System.Windows.Forms.Button Upgrade_btn;
+        private System.Windows.Forms.Button Reset_btn;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
     }

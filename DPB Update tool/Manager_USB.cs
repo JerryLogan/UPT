@@ -154,16 +154,20 @@ namespace DPB_Update_tool
                 TimeCnt = DateTime.Now;
                 TDiff = DateDiff(TimeStart, TimeCnt);
                 //if (showProgressBar)
-                    //ShowUpgradeTime(TDiff, dev);
+                //ShowUpgradeTime(TDiff, dev);
+                //label9.Text = "processing  "+ Math.Ceiling((float)TDiff/ globalVarManager.FWUpgtimeout * 100)+"%";
+                Console.WriteLine(1);
             }
             //stm8UPBar[dev] = false;
             //ShowUpgradeUI(false, dev);
             if (waitdisk == "" && TDiff >= globalVarManager.FWUpgtimeout)
             {
+                Console.WriteLine(2);
                 //LogManager.PrintLog(dev, "[WaitDiskBack Fail] The process is time out" + " (" + dev + ")");
+                MessageBox.Show("Update fail");
                 return false;
             }
-
+            Console.WriteLine(3);
             GC.Collect();
             return true;
         }
@@ -223,31 +227,31 @@ namespace DPB_Update_tool
                                     //LogManager.PrintLog(dev, "GetDirectory() temp_dev_InstanceID " + temp_dev_InstanceID + " (" + dev + ")");
                                     //LogManager.PrintLog(dev, "GetDirectory() deviceVIDPIDRaw " + deviceVIDPIDRaw + " (" + dev + ")");
                                     //LogManager.PrintLog(dev, "GetDirectory() temp_dev_location " + temp_dev_location + " (" + dev + ")");
-                                    if (!deviceVIDPIDRaw.Contains(globalVarManager.ModelPID))
-                                    {
-                                        //LogManager.PrintLog(dev, "GetDirectory() deviceVIDPIDRaw error " + deviceVIDPIDRaw + " (" + dev + ")");
-                                        //return "";
-                                        continue;
-                                    }
+                                    //if (!deviceVIDPIDRaw.Contains(globalVarManager.ModelPID))
+                                    //{
+                                    //    //LogManager.PrintLog(dev, "GetDirectory() deviceVIDPIDRaw error " + deviceVIDPIDRaw + " (" + dev + ")");
+                                    //    //return "";
+                                    //    continue;
+                                    //}
                                 }
 
-                                if (temp_dev_location == globalVarManager.multi_savedDeviceList[dev])
+
+                                if (!checksize || (checksize && WMIObject["Size"] != null && WMIObject["Size"].ToString() != ""))
                                 {
-                                    if (!checksize || (checksize && WMIObject["Size"] != null && WMIObject["Size"].ToString() != ""))
-                                    {
-                                        ClsDiskInfoEx clsDiskInfoEx = new ClsDiskInfoEx();
-                                        clsDiskInfoEx.GetPhysicalDisks();
-                                        string VolumeName = clsDiskInfoEx.GetDriveInfo(DeviceID).Substring(0, 1);
-                                        drive_name[dev] = NumberFromExcelColumn(VolumeName);
+                                    ClsDiskInfoEx clsDiskInfoEx = new ClsDiskInfoEx();
+                                    clsDiskInfoEx.GetPhysicalDisks();
+                                    string VolumeName = clsDiskInfoEx.GetDriveInfo(DeviceID).Substring(0, 1);
+                                    drive_name[dev] = NumberFromExcelColumn(VolumeName);
 
-                                        GC.Collect();
-                                        return VolumeName;
-                                    }
+                                    GC.Collect();
+                                    return VolumeName;
                                 }
+
                             }
                             catch (Exception)
                             {
                                 //LogManager.PrintLog(dev, "GetDirectory() Error" + " (" + dev + ")");
+                                label9.Text = "GetDirectory() Error";
                                 return "";
                             }
                         }
@@ -256,10 +260,13 @@ namespace DPB_Update_tool
                 catch (Exception)
                 {
                     //LogManager.PrintLog(dev, "GetDirectory() Error!!" + " (" + dev + ")");
+                    label9.Text = "GetDirectory() Error";
                     return "";
                 }
             }
             //LogManager.PrintLog(dev, "GetDirectory() Disk Not found " + " (" + dev + ")");
+            //label9.Text = "GetDirectory() Disk Not found";
+
             return "";
         }
 
